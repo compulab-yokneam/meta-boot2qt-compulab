@@ -1,0 +1,42 @@
+From 7436c0aa0c2a2d39174211ad3c3000251607e038 Mon Sep 17 00:00:00 2001
+From: Valentin Raevsky <valentin@compulab.co.il>
+Date: Wed, 20 Nov 2019 14:46:18 +0200
+Subject: [PATCH 1/2] env: Add compulab machine
+
+Signed-off-by: Valentin Raevsky <valentin@compulab.co.il>
+---
+ b2qt-init-build-env          | 3 +++
+ scripts/setup-environment.sh | 3 +++
+ 2 files changed, 6 insertions(+)
+
+diff --git a/b2qt-init-build-env b/b2qt-init-build-env
+index c56bf435..e2a38d39 100755
+--- a/b2qt-init-build-env
++++ b/b2qt-init-build-env
+@@ -118,6 +118,9 @@ get_groups() {
+     imx8*)
+       PROJECT_GROUPS="fsl-imx8"
+     ;;
++    cl-som-imx8|ucm-imx8m-mini|cl-som-imx8x)
++      PROJECT_GROUPS="fsl-imx8"
++    ;;
+     apalis-imx8|colibri-imx8qxp)
+       PROJECT_GROUPS="toradex-imx8"
+     ;;
+diff --git a/scripts/setup-environment.sh b/scripts/setup-environment.sh
+index 05e70159..529971e6 100755
+--- a/scripts/setup-environment.sh
++++ b/scripts/setup-environment.sh
+@@ -59,6 +59,9 @@ if [ ! -f ${PWD}/${BUILDDIRECTORY}/conf/bblayers.conf ]; then
+     imx8*)
+       LAYERSCONF="bblayers.conf.fsl-imx8.sample"
+     ;;
++    cl-som-imx8|ucm-imx8m-mini|cl-som-imx8x)
++      LAYERSCONF="bblayers.conf.fsl-imx8.sample"
++    ;;
+     apalis-imx8|colibri-imx8qxp)
+       LAYERSCONF="bblayers.conf.toradex-imx8.sample"
+     ;;
+-- 
+2.11.0
+
