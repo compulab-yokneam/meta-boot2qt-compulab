@@ -1,5 +1,14 @@
 # Quick Start Guide
 
+# Prereqisites
+Install the dependecies for the Yocto tools:
+<pre>
+sudo apt-get install gawk curl git-core git-lfs diffstat unzip p7zip-full texinfo \
+gcc-multilib build-essential chrpath libsdl1.2-dev xterm gperf bison \
+g++-multilib
+git-lfs install
+</pre>
+
 Supported CompuLab Machines:
 * `cl-som-imx8`
 * `cl-som-imx8x`
