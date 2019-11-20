@@ -5,7 +5,8 @@ Install the dependecies for the Yocto tools:
 <pre>
 sudo apt-get install gawk curl git-core git-lfs diffstat unzip p7zip-full texinfo \
 gcc-multilib build-essential chrpath libsdl1.2-dev xterm gperf bison \
-g++-multilib git-lfs install
+g++-multilib 
+git-lfs install
 </pre>
 Refer to the 
 
