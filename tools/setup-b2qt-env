@@ -56,30 +56,13 @@ fi
 
 source ./setup-environment.sh $@
 
-# 4.0 Update configurations' files
-
-BBLAYERS_CONF=conf/bblayers.conf
-cat << eof | tee -a ${BBLAYERS_CONF} > /dev/null
-
-BBLAYERS += " \\
-	\${BSPDIR}/sources/${meta_layer} \\
-"
-eof
-
-LOCAL_CONF=conf/local.conf
-cat << eof | tee -a ${LOCAL_CONF} > /dev/null
-BBMASK += "linux-compulab_4.14.98.bb"
-BBMASK += "meta-cl-som-imx8x/recipes-desktop"
-BBMASK += "bt-start"
-eof
-
 # Set the machine name
 sed -i 's/\(MACHINE\) ??=.*/\1 = \"'${MACHINE}'\"/g' ${LOCAL_CONF}
 
 # Remove comments and empty lines
 sed -i '/^#/d;/^$/d' ${LOCAL_CONF}
 
-# 5.0
+# 3.0
 cat << eom
 
 	For Boot to Qt for embedded Linux targets, run the build as follows:
