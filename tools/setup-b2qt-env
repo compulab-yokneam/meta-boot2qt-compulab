@@ -2,7 +2,7 @@
 
 # 0
 
-MACHINE=${MACHINE:-a-non-supported-machine}
+export MACHINE=${MACHINE:-a-non-supported-machine}
 
 declare -A SUPPORTED_MACHINE=([cl-som-imx8]="meta-bsp-imx8mq" [cl-som-imx8x]="meta-cl-som-imx8x" [ucm-imx8m-mini]="meta-bsp-imx8mm" )
 
@@ -27,25 +27,23 @@ else
 git -C ${sdir} status
 fi
 
-# 1.1 Apply the patchs if needed
+# 1.1 Apply the CompuLab Boot2qt patchs if needed
 
 if [[ ! -f ${sdir}/meta-boot2qt-distro/conf/distro/include/${MACHINE}.conf ]];then
 [[ -d ${pdir} ]] && git -C ${sdir} am ${pdir}/*.patch
 [[ $? -ne 0  ]] && git -C ${sdir} am --abort
 fi
 
-# 2.0 get the CompuLab MACHINE layer
+# 2.0 issue the boot2qt setup script & create the build environment
+
+env_scrip=sources/meta-boot2qt/b2qt-init-build-env
+bdir={$@:-b2qt}-${MACHINE}
+./${env_scrip} init --device ${MACHINE}
+
+# 2.1 Apply the CompuLab machine patchs if needed
 
 pdir="$(pwd)/sources/meta-boot2qt-compulab/compulab/patchs/${MACHINE}"
 sdir="$(pwd)/sources/${meta_layer}"
-
-if [[ ! -d ${sdir}/.git ]];then
-git clone -b master https://github.com/compulab-yokneam/${meta_layer}.git ${sdir}
-else
-git -C ${sdir} status
-fi
-
-# 2.1 Apply the patchs if needed
 
 if [[ -d sources/meta-boot2qt-compulab/compulab/patchs/${MACHINE} ]];then
 
@@ -54,11 +52,8 @@ if [[ -d sources/meta-boot2qt-compulab/compulab/patchs/${MACHINE} ]];then
 
 fi
 
-# 3.0 issue the boot2qt setup script & create the build environment
+# 2.2 Configure the build environment for the CompuLab machine
 
-env_scrip=sources/meta-boot2qt/b2qt-init-build-env
-bdir={$@:-b2qt}-${MACHINE}
-./${env_scrip} init --device ${MACHINE}
 source ./setup-environment.sh $@
 
 # 4.0 Update configurations' files
