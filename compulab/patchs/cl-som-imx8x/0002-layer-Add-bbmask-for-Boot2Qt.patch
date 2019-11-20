@@ -1,0 +1,23 @@
+From bf7aeadc2fa3fdfa467a13029f4bf0ce0bcdae03 Mon Sep 17 00:00:00 2001
+From: Valentin Raevsky <valentin@compulab.co.il>
+Date: Thu, 21 Nov 2019 00:33:26 +0200
+Subject: [PATCH 2/2] layer: Add bbmask for Boot2Qt
+
+Signed-off-by: Valentin Raevsky <valentin@compulab.co.il>
+---
+ conf/layer.conf | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/conf/layer.conf b/conf/layer.conf
+index aba6b41..baeddbf 100644
+--- a/conf/layer.conf
++++ b/conf/layer.conf
+@@ -8,3 +8,5 @@ BBFILES += "${LAYERDIR}/recipes-*/*/*.bb \
+ BBFILE_COLLECTIONS += "compulab-bsp"
+ BBFILE_PATTERN_compulab-bsp := "^${LAYERDIR}/"
+ BBFILE_PRIORITY_compulab-bsp = "9"
++
++BBMASK += "meta-cl-som-imx8x/recipes-desktop"
+-- 
+2.11.0
+

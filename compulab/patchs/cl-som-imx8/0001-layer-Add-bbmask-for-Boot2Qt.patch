@@ -1,0 +1,24 @@
+From b2b770abe5e1da054eb663e97d2cc0edf6b04b4a Mon Sep 17 00:00:00 2001
+From: Valentin Raevsky <valentin@compulab.co.il>
+Date: Thu, 21 Nov 2019 00:26:05 +0200
+Subject: [PATCH 1/1] layer: Add bbmask for Boot2Qt
+
+Signed-off-by: Valentin Raevsky <valentin@compulab.co.il>
+---
+ conf/layer.conf | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/conf/layer.conf b/conf/layer.conf
+index e93bea9..c8ce71c 100644
+--- a/conf/layer.conf
++++ b/conf/layer.conf
+@@ -10,5 +10,6 @@ BBFILE_PATTERN_compulab-bsp := "^${LAYERDIR}/"
+ BBFILE_PRIORITY_compulab-bsp = "9"
+ 
+ BBMASK += "meta-compulab/recipes-xfce"
++BBMASK += "meta-bsp-imx8mq/recipes-kernel/linux/linux-compulab_4.14.98.bb"
+ 
+ LAYERSERIES_COMPAT_compulab-bsp = "sumo warrior"
+-- 
+2.11.0
+
