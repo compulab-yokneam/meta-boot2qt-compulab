@@ -1,0 +1,96 @@
+#!/bin/bash -ex
+
+# 0
+
+MACHINE=${MACHINE:-a-non-supported-machine}
+
+declare -A SUPPORTED_MACHINE=([cl-som-imx8]="meta-bsp-imx8mq" [cl-som-imx8x]="meta-cl-som-imx8x" [ucm-imx8m-mini]="meta-bsp-imx8mm" )
+
+if [[ -z ${SUPPORTED_MACHINE[${MACHINE}]} ]];then
+cat << eom
+    ${MACHINE} is not in supported machine list.
+    Error exit.
+eom
+    return 0
+fi
+
+meta_layer=${SUPPORTED_MACHINE[${MACHINE}]}
+
+# 1.0 get boot2qt layer
+
+pdir="$(pwd)/sources/meta-boot2qt-compulab/b2qt/patchs"
+sdir="$(pwd)/sources/meta-boot2qt"
+
+if [[ ! -d ${sdir}/.git ]];then
+git clone -b sumo git://code.qt.io/yocto/meta-boot2qt.git ${sdir}
+else
+git -C ${sdir} status
+fi
+
+# 1.1 Apply the patchs if needed
+
+if [[ ! -f ${sdir}/meta-boot2qt-distro/conf/distro/include/${MACHINE}.conf ]];then
+[[ -d ${pdir} ]] && git -C ${sdir} am ${pdir}/*.patch
+[[ $? -ne 0  ]] && git -C ${sdir} am --abort
+fi
+
+# 2.0 get the CompuLab MACHINE layer
+
+pdir="$(pwd)/sources/meta-boot2qt-compulab/compulab/patchs/${MACHINE}"
+sdir="$(pwd)/sources/${meta_layer}"
+
+if [[ ! -d ${sdir}/.git ]];then
+git clone -b master https://github.com/compulab-yokneam/${meta_layer}.git ${sdir}
+else
+git -C ${sdir} status
+fi
+
+# 2.1 Apply the patchs if needed
+
+if [[ -d sources/meta-boot2qt-compulab/compulab/patchs/${MACHINE} ]];then
+
+[[ -d ${pdir} ]] && git -C ${sdir} am ${pdir}/*.patch
+[[ $? -ne 0  ]] && git -C ${sdir} am --abort
+
+fi
+
+# 3.0 issue the boot2qt setup script & create the build environment
+
+env_scrip=sources/meta-boot2qt/b2qt-init-build-env
+bdir={$@:-b2qt}-${MACHINE}
+./${env_scrip} init --device ${MACHINE}
+source ./setup-environment.sh $@
+
+# 4.0 Update configurations' files
+
+BBLAYERS_CONF=conf/bblayers.conf
+cat << eof | tee -a ${BBLAYERS_CONF} > /dev/null
+
+BBLAYERS += " \\
+	\${BSPDIR}/sources/${meta_layer} \\
+"
+eof
+
+LOCAL_CONF=conf/local.conf
+cat << eof | tee -a ${LOCAL_CONF} > /dev/null
+BBMASK += "linux-compulab_4.14.98.bb"
+BBMASK += "meta-cl-som-imx8x/recipes-desktop"
+BBMASK += "bt-start"
+eof
+
+# Set the machine name
+sed -i 's/\(MACHINE\) ??=.*/\1 = \"'${MACHINE}'\"/g' ${LOCAL_CONF}
+
+# Remove comments and empty lines
+sed -i '/^#/d;/^$/d' ${LOCAL_CONF}
+
+# 5.0
+cat << eom
+
+	For Boot to Qt for embedded Linux targets, run the build as follows:
+bitbake b2qt-embedded-qt5-image
+
+	For Qt Automotive targets, run the build as follows:
+bitbake b2qt-automotive-qt5-image
+
+eom
