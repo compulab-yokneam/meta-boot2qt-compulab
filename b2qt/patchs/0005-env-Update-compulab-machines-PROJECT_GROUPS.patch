@@ -1,0 +1,26 @@
+From c840c1bc0061abefb865677b485aef8090c77e58 Mon Sep 17 00:00:00 2001
+From: Valentin Raevsky <valentin@compulab.co.il>
+Date: Wed, 20 Nov 2019 22:44:59 +0200
+Subject: [PATCH 5/5] env: Update compulab machines PROJECT_GROUPS
+
+Signed-off-by: Valentin Raevsky <valentin@compulab.co.il>
+---
+ b2qt-init-build-env | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/b2qt-init-build-env b/b2qt-init-build-env
+index e2a38d39..fafc4cb3 100755
+--- a/b2qt-init-build-env
++++ b/b2qt-init-build-env
+@@ -119,7 +119,7 @@ get_groups() {
+       PROJECT_GROUPS="fsl-imx8"
+     ;;
+     cl-som-imx8|ucm-imx8m-mini|cl-som-imx8x)
+-      PROJECT_GROUPS="fsl-imx8"
++      PROJECT_GROUPS="compulab-imx8"
+     ;;
+     apalis-imx8|colibri-imx8qxp)
+       PROJECT_GROUPS="toradex-imx8"
+-- 
+2.11.0
+
