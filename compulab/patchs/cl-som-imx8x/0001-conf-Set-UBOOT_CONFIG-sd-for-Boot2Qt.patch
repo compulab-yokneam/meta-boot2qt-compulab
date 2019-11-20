@@ -1,0 +1,26 @@
+From fdaff3e5cc2474d78675fdbad6c88fa41c1c6e81 Mon Sep 17 00:00:00 2001
+From: Valentin Raevsky <valentin@compulab.co.il>
+Date: Wed, 20 Nov 2019 13:41:39 +0200
+Subject: [PATCH 1/1] conf: Set UBOOT_CONFIG=sd for Boot2Qt
+
+Signed-off-by: Valentin Raevsky <valentin@compulab.co.il>
+---
+ conf/machine/cl-som-imx8x.conf | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/conf/machine/cl-som-imx8x.conf b/conf/machine/cl-som-imx8x.conf
+index 2f9043b..08b9a9e 100644
+--- a/conf/machine/cl-som-imx8x.conf
++++ b/conf/machine/cl-som-imx8x.conf
+@@ -12,7 +12,7 @@ require conf/machine/include/arm/arch-arm64.inc
+ MACHINE_FEATURES += " optee"
+ 
+ # U-Boot #
+-UBOOT_CONFIG ??= "sf"
++UBOOT_CONFIG ??= "sd"
+ UBOOT_CONFIG[sf] = "cl-som-imx8x_defconfig"
+ UBOOT_CONFIG[sd] = "cl-som-imx8x_mmc_defconfig"
+ SPL_BINARY = "u-boot-spl.bin"
+-- 
+2.11.0
+
