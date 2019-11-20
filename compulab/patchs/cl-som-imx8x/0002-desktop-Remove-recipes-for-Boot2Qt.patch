@@ -1,0 +1,84 @@
+From f3ce64887bf97ee32255e285673c2189038a883c Mon Sep 17 00:00:00 2001
+From: Valentin Raevsky <valentin@compulab.co.il>
+Date: Thu, 21 Nov 2019 00:03:49 +0200
+Subject: [PATCH 2/2] desktop: Remove recipes for Boot2Qt
+
+Signed-off-by: Valentin Raevsky <valentin@compulab.co.il>
+---
+ recipes-desktop/cl-deploy/cl-deploy.bbappend       |  4 ----
+ recipes-desktop/cl-uboot/cl-uboot.bbappend         | 22 ----------------------
+ recipes-desktop/cl-uboot/files/cl-uboot.imx8x.work | 22 ----------------------
+ 3 files changed, 48 deletions(-)
+ delete mode 100644 recipes-desktop/cl-deploy/cl-deploy.bbappend
+ delete mode 100644 recipes-desktop/cl-uboot/cl-uboot.bbappend
+ delete mode 100644 recipes-desktop/cl-uboot/files/cl-uboot.imx8x.work
+
+diff --git a/recipes-desktop/cl-deploy/cl-deploy.bbappend b/recipes-desktop/cl-deploy/cl-deploy.bbappend
+deleted file mode 100644
+index 2b65f12..0000000
+--- a/recipes-desktop/cl-deploy/cl-deploy.bbappend
++++ /dev/null
+@@ -1,4 +0,0 @@
+-PACKAGE_ARCH = "${MACHINE_ARCH}"
+-RDEPENDS_${PN}_remove = "u-boot-fw-utils"
+-SRC_URI_remove = "file://cl-deploy.mtd"
+-COMPATIBLE_MACHINE = "(cl-som-imx8x)"
+diff --git a/recipes-desktop/cl-uboot/cl-uboot.bbappend b/recipes-desktop/cl-uboot/cl-uboot.bbappend
+deleted file mode 100644
+index 8bbb349..0000000
+--- a/recipes-desktop/cl-uboot/cl-uboot.bbappend
++++ /dev/null
+@@ -1,22 +0,0 @@
+-# Simple recipe to add desktop icon and executable to run
+-# CompuLab U-Boot Tool
+-
+-DESCRIPTION = "CompuLab U-Boot Tool for imx8x SoC"
+-FILESEXTRAPATHS_prepend := "${THISDIR}/files:"
+-
+-SRC_URI += "\
+-    file://cl-uboot.imx8x.work \
+-"
+-
+-S = "${WORKDIR}"
+-
+-do_install_prepend() {
+-#	mv ${S}/cl-uboot.imx8x.work ${S}/cl-uboot.work
+-	install -m 0755 ${S}/cl-uboot.imx8x.work ${S}/cl-uboot.work
+-}
+-
+-
+-PACKAGE_ARCH = "${MACHINE_ARCH}"
+-RDEPENDS_${PN}_remove  = " u-boot-compulab "
+-RDEPENDS_${PN}_append  = " imx-boot "
+-COMPATIBLE_MACHINE = "(cl-som-imx8x)"
+diff --git a/recipes-desktop/cl-uboot/files/cl-uboot.imx8x.work b/recipes-desktop/cl-uboot/files/cl-uboot.imx8x.work
+deleted file mode 100644
+index 2d0d679..0000000
+--- a/recipes-desktop/cl-uboot/files/cl-uboot.imx8x.work
++++ /dev/null
+@@ -1,22 +0,0 @@
+-#!/bin/bash
+-
+-# Select IMX-BOOT image
+-RADIO=$(ls /boot/ | awk '(/imx-boot/)&&($0=$1" OFF ")' ORS="")
+-SELECT=$(dialog --no-items --backtitle "Select a U-Boot file:" --radiolist "Available U-Boot files:" 12 80 12 ${RADIO} --stdout)
+-[[ -z ${SELECT} ]] && exit
+-IMX_BOOT=/boot/${SELECT}
+-
+-# Set constants
+-IMX_DEV=$(cat /proc/mtd | awk 'BEGIN {FS=":"} /"uboot"/ {print $1}')
+-IMX_SIZE=$(stat -c %s ${IMX_BOOT})
+-IMX_PART_SIZE=0x$(cat /proc/mtd | awk '/"uboot"/ {print $2}')
+-
+-# Erase partition
+-CMD="mtd_debug erase /dev/${IMX_DEV} 0 ${IMX_PART_SIZE}"
+-${CMD} 2>&1 | dialog --backtitle "${CMD}" --programbox "U-Boot partition erase result:" 12 80
+-
+-# Write image
+-CMD="mtd_debug write /dev/${IMX_DEV} 0 ${IMX_SIZE} ${IMX_BOOT}"
+-${CMD} 2>&1 | dialog --backtitle "${CMD}" --programbox "U-Boot flash result:" 12 80
+-
+-exit 0
+-- 
+2.11.0
+
