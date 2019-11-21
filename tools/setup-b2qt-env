@@ -66,6 +66,7 @@ sed -i '/^#/d;/^$/d' ${LOCAL_CONF}
 CORE_IMAGE_EXTRA_INSTALL+=" cl-deploy cl-uboot "
 cat << eof | tee -a ${LOCAL_CONF} > /dev/null
 CORE_IMAGE_EXTRA_INSTALL += "${CORE_IMAGE_EXTRA_INSTALL}"
+UBOOT_CONFIG = "sd"
 eof
 
 # 3.0
