@@ -5,6 +5,7 @@
 export MACHINE=${MACHINE:-a-non-supported-machine}
 
 declare -A SUPPORTED_MACHINE=([cl-som-imx8]="meta-bsp-imx8mq" [cl-som-imx8x]="meta-cl-som-imx8x" [ucm-imx8m-mini]="meta-bsp-imx8mm" )
+declare -A MACHINE_EXTRA_INSTALL=([cl-som-imx8]=" cl-deploy cl-uboot " [cl-som-imx8x]=" cl-deploy cl-uboot " [ucm-imx8m-mini]=" cl-deploy cl-uboot " )
 
 if [[ -z ${SUPPORTED_MACHINE[${MACHINE}]} ]];then
 cat << eom
@@ -15,6 +16,7 @@ eom
 fi
 
 meta_layer=${SUPPORTED_MACHINE[${MACHINE}]}
+extra_inst="${MACHINE_EXTRA_INSTALL[${MACHINE}]}"
 
 # 1.0 get boot2qt layer
 
@@ -62,11 +64,12 @@ sed -i 's/\(MACHINE\) ??=.*/\1 = \"'${MACHINE}'\"/g' ${LOCAL_CONF}
 # Remove comments and empty lines
 sed -i '/^#/d;/^$/d' ${LOCAL_CONF}
 
-# Add CompuLab packages
-CORE_IMAGE_EXTRA_INSTALL+=" cl-deploy cl-uboot "
+# Add CompuLab packages & options
+CORE_IMAGE_EXTRA_INSTALL=${extra_inst}
 cat << eof | tee -a ${LOCAL_CONF} > /dev/null
 CORE_IMAGE_EXTRA_INSTALL += "${CORE_IMAGE_EXTRA_INSTALL}"
 UBOOT_CONFIG = "sd"
+MACHINE_FIRMWARE_remove = "firmware-imx-brcm firmware-imx-iwlwifi"
 eof
 
 # 3.0
