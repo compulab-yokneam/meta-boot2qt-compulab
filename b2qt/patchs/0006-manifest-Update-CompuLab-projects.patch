@@ -1,0 +1,35 @@
+From c5dcaf5aa8c509ee1c32e31f765dfcf3f1c30a10 Mon Sep 17 00:00:00 2001
+From: Valentin Raevsky <valentin@compulab.co.il>
+Date: Thu, 21 Nov 2019 15:03:13 +0200
+Subject: [PATCH 6/7] manifest: Update CompuLab projects
+
+Signed-off-by: Valentin Raevsky <valentin@compulab.co.il>
+---
+ scripts/manifest.xml | 13 +++++++++++++
+ 1 file changed, 13 insertions(+)
+
+diff --git a/scripts/manifest.xml b/scripts/manifest.xml
+index 0449668f..633eedc2 100644
+--- a/scripts/manifest.xml
++++ b/scripts/manifest.xml
+@@ -140,4 +140,17 @@
+            path="sources/meta-cl-som-imx8x"
+            groups="notdefault,external,compulab-imx8"/>
+ 
++  <project name="meta-compulab"
++           remote="compulab"
++           revision="devel"
++           path="sources/meta-compulab"
++           groups="notdefault,external,compulab-imx8"/>
++
++  <project name="meta-compulab-bsp"
++           remote="compulab"
++           revision="master"
++           path="sources/meta-compulab-bsp"
++           groups="notdefault,external,compulab-imx8"/>
++
+ </manifest>
++
+-- 
+2.11.0
+

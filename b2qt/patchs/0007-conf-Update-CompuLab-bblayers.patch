@@ -1,0 +1,54 @@
+From 29b9be5f1ae7c412b8be834215cfa2ed676b8810 Mon Sep 17 00:00:00 2001
+From: Valentin Raevsky <valentin@compulab.co.il>
+Date: Thu, 21 Nov 2019 15:04:00 +0200
+Subject: [PATCH 7/7] conf: Update CompuLab bblayers
+
+Signed-off-by: Valentin Raevsky <valentin@compulab.co.il>
+---
+ meta-boot2qt-distro/conf/bblayers.conf.cl-som-imx8.sample    | 4 ++++
+ meta-boot2qt-distro/conf/bblayers.conf.cl-som-imx8x.sample   | 4 ++++
+ meta-boot2qt-distro/conf/bblayers.conf.ucm-imx8m-mini.sample | 4 ++++
+ 3 files changed, 12 insertions(+)
+
+diff --git a/meta-boot2qt-distro/conf/bblayers.conf.cl-som-imx8.sample b/meta-boot2qt-distro/conf/bblayers.conf.cl-som-imx8.sample
+index 50724850..57400bf4 100644
+--- a/meta-boot2qt-distro/conf/bblayers.conf.cl-som-imx8.sample
++++ b/meta-boot2qt-distro/conf/bblayers.conf.cl-som-imx8.sample
+@@ -53,4 +53,8 @@ BBLAYERS ?= " \
+   ${BSPDIR}/sources/meta-mingw \
+   ${BSPDIR}/sources/meta-qt5 \
+   ${BSPDIR}/sources/meta-bsp-imx8mq \
++  ${BSPDIR}/sources/meta-compulab \
++  ${BSPDIR}/sources/meta-compulab-bsp/meta-desktop \
++  ${BSPDIR}/sources/meta-compulab-bsp/meta-multimedia \
++  ${BSPDIR}/sources/meta-compulab-bsp/meta-bsp \
+   "
+diff --git a/meta-boot2qt-distro/conf/bblayers.conf.cl-som-imx8x.sample b/meta-boot2qt-distro/conf/bblayers.conf.cl-som-imx8x.sample
+index 169f3eb5..035cfebf 100644
+--- a/meta-boot2qt-distro/conf/bblayers.conf.cl-som-imx8x.sample
++++ b/meta-boot2qt-distro/conf/bblayers.conf.cl-som-imx8x.sample
+@@ -53,4 +53,8 @@ BBLAYERS ?= " \
+   ${BSPDIR}/sources/meta-mingw \
+   ${BSPDIR}/sources/meta-qt5 \
+   ${BSPDIR}/sources/meta-cl-som-imx8x \
++  ${BSPDIR}/sources/meta-compulab \
++  ${BSPDIR}/sources/meta-compulab-bsp/meta-desktop \
++  ${BSPDIR}/sources/meta-compulab-bsp/meta-multimedia \
++  ${BSPDIR}/sources/meta-compulab-bsp/meta-bsp \
+   "
+diff --git a/meta-boot2qt-distro/conf/bblayers.conf.ucm-imx8m-mini.sample b/meta-boot2qt-distro/conf/bblayers.conf.ucm-imx8m-mini.sample
+index 02342d4e..8e391832 100644
+--- a/meta-boot2qt-distro/conf/bblayers.conf.ucm-imx8m-mini.sample
++++ b/meta-boot2qt-distro/conf/bblayers.conf.ucm-imx8m-mini.sample
+@@ -53,4 +53,8 @@ BBLAYERS ?= " \
+   ${BSPDIR}/sources/meta-mingw \
+   ${BSPDIR}/sources/meta-qt5 \
+   ${BSPDIR}/sources/meta-bsp-imx8mm \
++  ${BSPDIR}/sources/meta-compulab \
++  ${BSPDIR}/sources/meta-compulab-bsp/meta-desktop \
++  ${BSPDIR}/sources/meta-compulab-bsp/meta-multimedia \
++  ${BSPDIR}/sources/meta-compulab-bsp/meta-bsp \
+   "
+-- 
+2.11.0
+
