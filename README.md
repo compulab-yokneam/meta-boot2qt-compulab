@@ -19,7 +19,7 @@ Supported CompuLab Machines:
 # Prepare Boot2Qt build environment
 <pre>
 mkdir -p ~/Qt/sources; cd ~/Qt
-git clone https://github.com/compulab-yokneam/meta-boot2qt-compulab.git sources/meta-boot2qt-compulab
+git clone -b devel https://github.com/compulab-yokneam/meta-boot2qt-compulab.git sources/meta-boot2qt-compulab
 </pre>
 
 # Set a desire machine
