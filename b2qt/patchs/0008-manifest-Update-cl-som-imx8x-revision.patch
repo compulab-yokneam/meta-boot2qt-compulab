@@ -1,0 +1,26 @@
+From 96da669a34e0584017f260d8a3962f3707710bc1 Mon Sep 17 00:00:00 2001
+From: Valentin Raevsky <valentin@compulab.co.il>
+Date: Thu, 21 Nov 2019 15:31:34 +0200
+Subject: [PATCH 8/8] manifest: Update cl-som-imx8x revision
+
+Signed-off-by: Valentin Raevsky <valentin@compulab.co.il>
+---
+ scripts/manifest.xml | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/scripts/manifest.xml b/scripts/manifest.xml
+index 633eedc2..7ed74adf 100644
+--- a/scripts/manifest.xml
++++ b/scripts/manifest.xml
+@@ -136,7 +136,7 @@
+ 
+   <project name="meta-cl-som-imx8x"
+            remote="compulab"
+-           revision="bc4b7e796d82145032031cd8656090ace6270544"
++           revision="master"
+            path="sources/meta-cl-som-imx8x"
+            groups="notdefault,external,compulab-imx8"/>
+ 
+-- 
+2.11.0
+
