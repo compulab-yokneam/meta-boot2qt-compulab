@@ -58,6 +58,8 @@ fi
 
 source ./setup-environment.sh $@
 
+LOCAL_CONF=conf/local.conf
+
 # Set the machine name
 sed -i 's/\(MACHINE\) ??=.*/\1 = \"'${MACHINE}'\"/g' ${LOCAL_CONF}
 
