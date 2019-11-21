@@ -62,6 +62,12 @@ sed -i 's/\(MACHINE\) ??=.*/\1 = \"'${MACHINE}'\"/g' ${LOCAL_CONF}
 # Remove comments and empty lines
 sed -i '/^#/d;/^$/d' ${LOCAL_CONF}
 
+# Add CompuLab packages
+CORE_IMAGE_EXTRA_INSTALL+=" cl-deploy cl-uboot "
+cat << eof | tee -a ${LOCAL_CONF} > /dev/null
+CORE_IMAGE_EXTRA_INSTALL += "${CORE_IMAGE_EXTRA_INSTALL}"
+eof
+
 # 3.0
 cat << eom
 
