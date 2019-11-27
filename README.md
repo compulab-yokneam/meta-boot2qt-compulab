@@ -4,12 +4,22 @@
 Make sure that the build machine meats the Boot2Qt build host [requirements](https://doc.qt.io/QtForDeviceCreation/qtee-custom-embedded-linux-image.html#requirements).
 
 Install the dependecies for the Yocto tools:
+* Add the `git-lfs` repository:
 <pre>
-sudo apt-get install gawk curl git-core git-lfs diffstat unzip p7zip-full texinfo \
-gcc-multilib build-essential chrpath libsdl1.2-dev xterm gperf bison \
-g++-multilib 
+curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh | sudo bash
+</pre>
+
+* Install the debian packages:
+<pre>
+sudo apt-get install --yes gawk curl git-core git-lfs diffstat unzip p7zip-full texinfo \
+gcc-multilib build-essential chrpath libsdl1.2-dev xterm gperf bison g++-multilib 
+</pre>
+
+* Initialize the `git-lfs`:
+<pre>
 git-lfs install
 </pre>
+
 
 Supported CompuLab Machines:
 * `cl-som-imx8`
