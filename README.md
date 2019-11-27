@@ -1,4 +1,10 @@
 # Quick Start Guide
+The purpose of this page is to provide a step-by-step procedure for creating Boot2Qt images for the CompuLab SoMs.
+
+Supported CompuLab Machines:
+* `cl-som-imx8`
+* `cl-som-imx8x`
+* `ucm-imx8m-mini`
 
 # Prereqisites
 Make sure that the build machine meats the Boot2Qt build host [requirements](https://doc.qt.io/QtForDeviceCreation/qtee-custom-embedded-linux-image.html#requirements).
@@ -19,12 +25,6 @@ gcc-multilib build-essential chrpath libsdl1.2-dev xterm gperf bison g++-multili
 <pre>
 git-lfs install
 </pre>
-
-
-Supported CompuLab Machines:
-* `cl-som-imx8`
-* `cl-som-imx8x`
-* `ucm-imx8m-mini`
 
 # Prepare Boot2Qt build environment
 <pre>
