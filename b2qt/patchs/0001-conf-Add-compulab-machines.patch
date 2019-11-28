@@ -1,0 +1,251 @@
+From 9c2348a32820a34d7d69ee7e6c76fa83d9f383d9 Mon Sep 17 00:00:00 2001
+From: Valentin Raevsky <valentin@compulab.co.il>
+Date: Thu, 28 Nov 2019 13:54:45 +0200
+Subject: [PATCH 1/3] conf: Add compulab machines
+
+Signed-off-by: Valentin Raevsky <valentin@compulab.co.il>
+---
+ .../conf/bblayers.conf.cl-som-imx8.sample          | 60 ++++++++++++++++++++++
+ .../conf/bblayers.conf.cl-som-imx8x.sample         | 60 ++++++++++++++++++++++
+ .../conf/bblayers.conf.ucm-imx8m-mini.sample       | 60 ++++++++++++++++++++++
+ .../conf/distro/include/cl-som-imx8.conf           |  4 ++
+ .../conf/distro/include/cl-som-imx8x.conf          |  4 ++
+ .../conf/distro/include/ucm-imx8m-mini.conf        |  3 ++
+ 6 files changed, 191 insertions(+)
+ create mode 100644 meta-boot2qt-distro/conf/bblayers.conf.cl-som-imx8.sample
+ create mode 100644 meta-boot2qt-distro/conf/bblayers.conf.cl-som-imx8x.sample
+ create mode 100644 meta-boot2qt-distro/conf/bblayers.conf.ucm-imx8m-mini.sample
+ create mode 100644 meta-boot2qt-distro/conf/distro/include/cl-som-imx8.conf
+ create mode 100644 meta-boot2qt-distro/conf/distro/include/cl-som-imx8x.conf
+ create mode 100644 meta-boot2qt-distro/conf/distro/include/ucm-imx8m-mini.conf
+
+diff --git a/meta-boot2qt-distro/conf/bblayers.conf.cl-som-imx8.sample b/meta-boot2qt-distro/conf/bblayers.conf.cl-som-imx8.sample
+new file mode 100644
+index 00000000..57400bf4
+--- /dev/null
++++ b/meta-boot2qt-distro/conf/bblayers.conf.cl-som-imx8.sample
+@@ -0,0 +1,60 @@
++############################################################################
++##
++## Copyright (C) 2018 The Qt Company Ltd.
++## Contact: https://www.qt.io/licensing/
++##
++## This file is part of the Boot to Qt meta layer.
++##
++## $QT_BEGIN_LICENSE:GPL$
++## Commercial License Usage
++## Licensees holding valid commercial Qt licenses may use this file in
++## accordance with the commercial license agreement provided with the
++## Software or, alternatively, in accordance with the terms contained in
++## a written agreement between you and The Qt Company. For licensing terms
++## and conditions see https://www.qt.io/terms-conditions. For further
++## information use the contact form at https://www.qt.io/contact-us.
++##
++## GNU General Public License Usage
++## Alternatively, this file may be used under the terms of the GNU
++## General Public License version 3 or (at your option) any later version
++## approved by the KDE Free Qt Foundation. The licenses are as published by
++## the Free Software Foundation and appearing in the file LICENSE.GPL3
++## included in the packaging of this file. Please review the following
++## information to ensure the GNU General Public License requirements will
++## be met: https://www.gnu.org/licenses/gpl-3.0.html.
++##
++## $QT_END_LICENSE$
++##
++############################################################################
++
++# POKY_BBLAYERS_CONF_VERSION is increased each time build/conf/bblayers.conf
++# changes incompatibly
++POKY_BBLAYERS_CONF_VERSION = "2"
++
++BBPATH = "${TOPDIR}"
++BBFILES ?= ""
++BSPDIR := "${@os.path.abspath(os.path.dirname(d.getVar('FILE')) + '/../..')}"
++
++BBLAYERS ?= " \
++  ${BSPDIR}/sources/poky/meta \
++  ${BSPDIR}/sources/poky/meta-poky \
++  ${BSPDIR}/sources/meta-fsl-bsp-release/imx/meta-bsp \
++  ${BSPDIR}/sources/meta-fsl-bsp-release/imx/meta-sdk \
++  ${BSPDIR}/sources/meta-freescale \
++  ${BSPDIR}/sources/meta-freescale-3rdparty \
++  ${BSPDIR}/sources/meta-openembedded/meta-oe \
++  ${BSPDIR}/sources/meta-openembedded/meta-python \
++  ${BSPDIR}/sources/meta-openembedded/meta-networking \
++  ${BSPDIR}/sources/meta-openembedded/meta-initramfs \
++  ${BSPDIR}/sources/meta-openembedded/meta-multimedia \
++  ${BSPDIR}/sources/meta-boot2qt/meta-boot2qt \
++  ${BSPDIR}/sources/meta-boot2qt/meta-boot2qt-distro \
++  ${BSPDIR}/sources/meta-boot2qt/meta-fsl-extras \
++  ${BSPDIR}/sources/meta-mingw \
++  ${BSPDIR}/sources/meta-qt5 \
++  ${BSPDIR}/sources/meta-bsp-imx8mq \
++  ${BSPDIR}/sources/meta-compulab \
++  ${BSPDIR}/sources/meta-compulab-bsp/meta-desktop \
++  ${BSPDIR}/sources/meta-compulab-bsp/meta-multimedia \
++  ${BSPDIR}/sources/meta-compulab-bsp/meta-bsp \
++  "
+diff --git a/meta-boot2qt-distro/conf/bblayers.conf.cl-som-imx8x.sample b/meta-boot2qt-distro/conf/bblayers.conf.cl-som-imx8x.sample
+new file mode 100644
+index 00000000..035cfebf
+--- /dev/null
++++ b/meta-boot2qt-distro/conf/bblayers.conf.cl-som-imx8x.sample
+@@ -0,0 +1,60 @@
++############################################################################
++##
++## Copyright (C) 2018 The Qt Company Ltd.
++## Contact: https://www.qt.io/licensing/
++##
++## This file is part of the Boot to Qt meta layer.
++##
++## $QT_BEGIN_LICENSE:GPL$
++## Commercial License Usage
++## Licensees holding valid commercial Qt licenses may use this file in
++## accordance with the commercial license agreement provided with the
++## Software or, alternatively, in accordance with the terms contained in
++## a written agreement between you and The Qt Company. For licensing terms
++## and conditions see https://www.qt.io/terms-conditions. For further
++## information use the contact form at https://www.qt.io/contact-us.
++##
++## GNU General Public License Usage
++## Alternatively, this file may be used under the terms of the GNU
++## General Public License version 3 or (at your option) any later version
++## approved by the KDE Free Qt Foundation. The licenses are as published by
++## the Free Software Foundation and appearing in the file LICENSE.GPL3
++## included in the packaging of this file. Please review the following
++## information to ensure the GNU General Public License requirements will
++## be met: https://www.gnu.org/licenses/gpl-3.0.html.
++##
++## $QT_END_LICENSE$
++##
++############################################################################
++
++# POKY_BBLAYERS_CONF_VERSION is increased each time build/conf/bblayers.conf
++# changes incompatibly
++POKY_BBLAYERS_CONF_VERSION = "2"
++
++BBPATH = "${TOPDIR}"
++BBFILES ?= ""
++BSPDIR := "${@os.path.abspath(os.path.dirname(d.getVar('FILE')) + '/../..')}"
++
++BBLAYERS ?= " \
++  ${BSPDIR}/sources/poky/meta \
++  ${BSPDIR}/sources/poky/meta-poky \
++  ${BSPDIR}/sources/meta-fsl-bsp-release/imx/meta-bsp \
++  ${BSPDIR}/sources/meta-fsl-bsp-release/imx/meta-sdk \
++  ${BSPDIR}/sources/meta-freescale \
++  ${BSPDIR}/sources/meta-freescale-3rdparty \
++  ${BSPDIR}/sources/meta-openembedded/meta-oe \
++  ${BSPDIR}/sources/meta-openembedded/meta-python \
++  ${BSPDIR}/sources/meta-openembedded/meta-networking \
++  ${BSPDIR}/sources/meta-openembedded/meta-initramfs \
++  ${BSPDIR}/sources/meta-openembedded/meta-multimedia \
++  ${BSPDIR}/sources/meta-boot2qt/meta-boot2qt \
++  ${BSPDIR}/sources/meta-boot2qt/meta-boot2qt-distro \
++  ${BSPDIR}/sources/meta-boot2qt/meta-fsl-extras \
++  ${BSPDIR}/sources/meta-mingw \
++  ${BSPDIR}/sources/meta-qt5 \
++  ${BSPDIR}/sources/meta-cl-som-imx8x \
++  ${BSPDIR}/sources/meta-compulab \
++  ${BSPDIR}/sources/meta-compulab-bsp/meta-desktop \
++  ${BSPDIR}/sources/meta-compulab-bsp/meta-multimedia \
++  ${BSPDIR}/sources/meta-compulab-bsp/meta-bsp \
++  "
+diff --git a/meta-boot2qt-distro/conf/bblayers.conf.ucm-imx8m-mini.sample b/meta-boot2qt-distro/conf/bblayers.conf.ucm-imx8m-mini.sample
+new file mode 100644
+index 00000000..8e391832
+--- /dev/null
++++ b/meta-boot2qt-distro/conf/bblayers.conf.ucm-imx8m-mini.sample
+@@ -0,0 +1,60 @@
++############################################################################
++##
++## Copyright (C) 2018 The Qt Company Ltd.
++## Contact: https://www.qt.io/licensing/
++##
++## This file is part of the Boot to Qt meta layer.
++##
++## $QT_BEGIN_LICENSE:GPL$
++## Commercial License Usage
++## Licensees holding valid commercial Qt licenses may use this file in
++## accordance with the commercial license agreement provided with the
++## Software or, alternatively, in accordance with the terms contained in
++## a written agreement between you and The Qt Company. For licensing terms
++## and conditions see https://www.qt.io/terms-conditions. For further
++## information use the contact form at https://www.qt.io/contact-us.
++##
++## GNU General Public License Usage
++## Alternatively, this file may be used under the terms of the GNU
++## General Public License version 3 or (at your option) any later version
++## approved by the KDE Free Qt Foundation. The licenses are as published by
++## the Free Software Foundation and appearing in the file LICENSE.GPL3
++## included in the packaging of this file. Please review the following
++## information to ensure the GNU General Public License requirements will
++## be met: https://www.gnu.org/licenses/gpl-3.0.html.
++##
++## $QT_END_LICENSE$
++##
++############################################################################
++
++# POKY_BBLAYERS_CONF_VERSION is increased each time build/conf/bblayers.conf
++# changes incompatibly
++POKY_BBLAYERS_CONF_VERSION = "2"
++
++BBPATH = "${TOPDIR}"
++BBFILES ?= ""
++BSPDIR := "${@os.path.abspath(os.path.dirname(d.getVar('FILE')) + '/../..')}"
++
++BBLAYERS ?= " \
++  ${BSPDIR}/sources/poky/meta \
++  ${BSPDIR}/sources/poky/meta-poky \
++  ${BSPDIR}/sources/meta-fsl-bsp-release/imx/meta-bsp \
++  ${BSPDIR}/sources/meta-fsl-bsp-release/imx/meta-sdk \
++  ${BSPDIR}/sources/meta-freescale \
++  ${BSPDIR}/sources/meta-freescale-3rdparty \
++  ${BSPDIR}/sources/meta-openembedded/meta-oe \
++  ${BSPDIR}/sources/meta-openembedded/meta-python \
++  ${BSPDIR}/sources/meta-openembedded/meta-networking \
++  ${BSPDIR}/sources/meta-openembedded/meta-initramfs \
++  ${BSPDIR}/sources/meta-openembedded/meta-multimedia \
++  ${BSPDIR}/sources/meta-boot2qt/meta-boot2qt \
++  ${BSPDIR}/sources/meta-boot2qt/meta-boot2qt-distro \
++  ${BSPDIR}/sources/meta-boot2qt/meta-fsl-extras \
++  ${BSPDIR}/sources/meta-mingw \
++  ${BSPDIR}/sources/meta-qt5 \
++  ${BSPDIR}/sources/meta-bsp-imx8mm \
++  ${BSPDIR}/sources/meta-compulab \
++  ${BSPDIR}/sources/meta-compulab-bsp/meta-desktop \
++  ${BSPDIR}/sources/meta-compulab-bsp/meta-multimedia \
++  ${BSPDIR}/sources/meta-compulab-bsp/meta-bsp \
++  "
+diff --git a/meta-boot2qt-distro/conf/distro/include/cl-som-imx8.conf b/meta-boot2qt-distro/conf/distro/include/cl-som-imx8.conf
+new file mode 100644
+index 00000000..9b9a0c61
+--- /dev/null
++++ b/meta-boot2qt-distro/conf/distro/include/cl-som-imx8.conf
+@@ -0,0 +1,4 @@
++include conf/distro/include/fsl-imx8.inc
++IMAGE_BOOT_FILES += "cl-som-imx8.dtb "
++IMAGE_BOOT_FILES += "sbc-imx8*.dtb "
++DEPLOY_CONF_NAME = "CompuLab cl-som-imx8"
+diff --git a/meta-boot2qt-distro/conf/distro/include/cl-som-imx8x.conf b/meta-boot2qt-distro/conf/distro/include/cl-som-imx8x.conf
+new file mode 100644
+index 00000000..f905c7c0
+--- /dev/null
++++ b/meta-boot2qt-distro/conf/distro/include/cl-som-imx8x.conf
+@@ -0,0 +1,4 @@
++include conf/distro/include/fsl-imx8.inc
++IMAGE_BOOT_FILES += "cl-som-imx8x.dtb "
++IMAGE_BOOT_FILES += "sb-imx8x.dtb "
++DEPLOY_CONF_NAME = "CompuLab cl-som-imx8x"
+diff --git a/meta-boot2qt-distro/conf/distro/include/ucm-imx8m-mini.conf b/meta-boot2qt-distro/conf/distro/include/ucm-imx8m-mini.conf
+new file mode 100644
+index 00000000..6d85c2d6
+--- /dev/null
++++ b/meta-boot2qt-distro/conf/distro/include/ucm-imx8m-mini.conf
+@@ -0,0 +1,3 @@
++include conf/distro/include/fsl-imx8.inc
++IMAGE_BOOT_FILES += "ucm-imx8m*.dtb "
++DEPLOY_CONF_NAME = "CompuLab ucm-imx8m-mini"
+-- 
+2.11.0
+

@@ -1,0 +1,85 @@
+From cf93fe2e7a938071d4e45cc3e75247c9f1723f82 Mon Sep 17 00:00:00 2001
+From: Valentin Raevsky <valentin@compulab.co.il>
+Date: Thu, 28 Nov 2019 13:55:25 +0200
+Subject: [PATCH 2/3] manifest: Add CompuLab projects
+
+Signed-off-by: Valentin Raevsky <valentin@compulab.co.il>
+---
+ scripts/manifest.xml | 38 +++++++++++++++++++++++++++++++++++---
+ 1 file changed, 35 insertions(+), 3 deletions(-)
+
+diff --git a/scripts/manifest.xml b/scripts/manifest.xml
+index 763d8663..95fb2e80 100644
+--- a/scripts/manifest.xml
++++ b/scripts/manifest.xml
+@@ -16,6 +16,7 @@
+   <remote fetch="git://github.com/boundarydevices" name="boundary"/>
+   <remote fetch="git://github.com/toradex" name="toradex-github"/>
+   <remote fetch="git://source.codeaurora.org/external/imx" name="aurora-imx"/>
++  <remote fetch="https://github.com/compulab-yokneam" name="compulab"/>
+ 
+   <project name="poky"
+            remote="yocto"
+@@ -38,12 +39,12 @@
+            remote="freescale"
+            revision="b73854c078b0a174613135b60da3377a1055f477"
+            path="sources/meta-freescale"
+-           groups="notdefault,external,fsl,toradex,smx6,boundary,fsl-imx8,toradex-imx8"/>
++           groups="notdefault,external,fsl,toradex,smx6,boundary,fsl-imx8,toradex-imx8,compulab-imx8"/>
+   <project name="meta-freescale-3rdparty"
+            remote="freescale"
+            revision="c4b5ac6b20e4245ce0630e9197313aaef999a331"
+            path="sources/meta-freescale-3rdparty"
+-           groups="notdefault,external,fsl,toradex,smx6,boundary,fsl-imx8,toradex-imx8"/>
++           groups="notdefault,external,fsl,toradex,smx6,boundary,fsl-imx8,toradex-imx8,compulab-imx8"/>
+   <project name="meta-raspberrypi"
+            remote="yocto"
+            revision="89bdf97beaf3b136c24c4d6f86c0bcbb47fe3043"
+@@ -93,7 +94,7 @@
+            remote="aurora-imx"
+            revision="cb65aa03c70d0b88cdc2b06eb56ab59ae01f54bf"
+            path="sources/meta-fsl-bsp-release"
+-           groups="notdefault,external,fsl-imx8"/>
++           groups="notdefault,external,fsl-imx8,compulab-imx8"/>
+   <project name="meta-fsl-bsp-release"
+            remote="toradex-github"
+            revision="55754a3cc79759f18fa1df88ae2ffa91fbd87d84"
+@@ -120,4 +121,35 @@
+            revision="ba2b99a9a5895033f081ffce25b0fd45e847c4c2"
+            path="sources/meta-smx6"
+            groups="notdefault,internal"/>
++
++  <project name="meta-bsp-imx8mq"
++           remote="compulab"
++           revision="03b55c7def9dafe260b408dbc109cf2d63f14c65"
++           path="sources/meta-bsp-imx8mq"
++           groups="notdefault,external,compulab-imx8"/>
++
++  <project name="meta-bsp-imx8mm"
++           remote="compulab"
++           revision="f43145c1fee76f01e60e5dc65fdbbcbd6bab88d2"
++           path="sources/meta-bsp-imx8mm"
++           groups="notdefault,external,compulab-imx8"/>
++
++  <project name="meta-cl-som-imx8x"
++           remote="compulab"
++           revision="master"
++           path="sources/meta-cl-som-imx8x"
++           groups="notdefault,external,compulab-imx8"/>
++
++  <project name="meta-compulab"
++           remote="compulab"
++           revision="devel"
++           path="sources/meta-compulab"
++           groups="notdefault,external,compulab-imx8"/>
++
++  <project name="meta-compulab-bsp"
++           remote="compulab"
++           revision="master"
++           path="sources/meta-compulab-bsp"
++           groups="notdefault,external,compulab-imx8"/>
++
+ </manifest>
+-- 
+2.11.0
+
