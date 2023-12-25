@@ -1,20 +1,20 @@
 #!/bin/bash -e
 
-MACHINE=${MACHINE:-ucm-imx8m-plus}
-DISTRO=${DISTRO:-fsl-imx-xwayland}
+export MACHINE=${MACHINE:-ucm-imx8m-plus}
+export _MACHINE=${MACHINE}
 EULA=1
-T="../sources/meta-bsp-imx8mp/templates"
+T="../sources/meta-boot2qt-compulab/templates"
 
 BD=$(cat <<< $@ | awk '$0=$NF')
 
 if [[ -d ${BD} ]];then
 
 echo "Back to the build environment ${BD}"
-. setup-environment ${BD}
+source setup-environment.sh ${BD}
 
 else
 
-. imx-setup-release.sh $@
+source setup-environment.sh ${BD}
 
 for _d in ${T}/*;do
 	_file=$(basename ${_d})
@@ -22,4 +22,8 @@ for _d in ${T}/*;do
 		cat ${_f} >> conf/${_file}
 	done;
 done
+
+sed -i "/^#/d;/^$/d" conf/local.conf
+sed -i "s/\(MACHINE ??= \).*/\1"\""${_MACHINE}"\""/g" conf/local.conf
+
 fi
