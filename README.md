@@ -8,8 +8,6 @@
 Supported CompuLab Machines:
 * `ucm-imx8m-plus`
 
-https://raw.githubusercontent.com/compulab-yokneam/meta-boot2qt-compulab/mickledore/README.md
-
 # Prepare Boot2Qt build environment
 <pre>
 bash <(curl -L https://raw.githubusercontent.com/compulab-yokneam/meta-boot2qt-compulab/mickledore/tools/run.me)
