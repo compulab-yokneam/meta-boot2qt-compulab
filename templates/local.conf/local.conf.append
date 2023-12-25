@@ -1,0 +1,7 @@
+BB_SRCREV_POLICY = "clear"
+
+BBMASK += "nxp-demo-experience_%.bbappend"
+MACHINE_FIRMWARE:remove = " linux-firmware-ax210 "
+MACHINE_FIRMWARE:remove = " linux-firmware-ax200 "
+
+DRAM_CONF = "d2d4"

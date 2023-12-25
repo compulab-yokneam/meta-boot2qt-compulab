@@ -1,0 +1,4 @@
+BBLAYERS += " \
+  ${BSPDIR}/sources/meta-freescale \
+  ${BSPDIR}/sources/meta-freescale-3rdparty \
+"
