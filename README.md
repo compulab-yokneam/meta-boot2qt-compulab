@@ -1,26 +1,30 @@
 # Quick Start Guide
 
+
+|NOTE|This development branch has not yet been released/supported officially by CompuLab.|
+|---|---|
+
+
 Supported CompuLab Machines:
-* `cl-som-imx8`
-* `cl-som-imx8x`
-* `ucm-imx8m-mini`
+* `ucm-imx8m-plus`
+
+https://raw.githubusercontent.com/compulab-yokneam/meta-boot2qt-compulab/mickledore/README.md
 
 # Prepare Boot2Qt build environment
 <pre>
-mkdir -p ~/Qt/sources; cd ~/Qt
-git clone https://github.com/compulab-yokneam/meta-boot2qt-compulab.git sources/meta-boot2qt-compulab
+bash <(curl -L https://raw.githubusercontent.com/compulab-yokneam/meta-boot2qt-compulab/mickledore/tools/run.me)
 </pre>
 
 # Set a desire machine
-* `cl-som-imx8`
+* `ucm-imx8m-plus`
 <pre>
-export MACHINE=cl-som-imx8
+export MACHINE=ucm-imx8m-plus
 </pre>
 
 # Issue the CompuLab setup script
 This script creates the build environment for the ${MACHINE}
 <pre>
-source sources/meta-boot2qt-compulab/tools/setup-b2qt-env
+source compulab-setup-env -b build-b2qt-${MACHINE}
 </pre>
 
 # Create a Boot2Qt image
