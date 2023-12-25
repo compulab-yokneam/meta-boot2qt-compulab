@@ -1,0 +1,29 @@
+#!/bin/bash -e
+
+export COMPULAB_MACHINE=ucm-imx8m-plus
+export MACHINE=${COMPULAB_MACHINE}
+export BSP_DIR=${BSP_DIR:-$(pwd)/compulab-boot2qt-bsp}
+mkdir ${BSP_DIR} -p
+pushd ${BSP_DIR}
+BSP_DIR=$(pwd)
+QT_MANIFEST=v6.6.1.xml
+BUILD_DIR=build-b2qt-
+
+if [ ! -d ${BSP_DIR}/.repo ];then
+    repo init -u git://code.qt.io/yocto/boot2qt-manifest -m ${QT_MANIFEST}
+    wget --directory-prefix .repo/local_manifests https://raw.githubusercontent.com/compulab-yokneam/meta-bsp-imx8mp/mickledore/scripts/meta-bsp-imx8mp-machine.xml
+    wget --directory-prefix .repo/local_manifests https://raw.githubusercontent.com/compulab-yokneam/meta-boot2qt-compulab/mickledore/scripts/meta-boot2qt-compulab.xml
+    repo sync
+fi
+
+if [ ! -d ${BSP_DIR}/${BUILD_DIR}-${COMPULAB_MACHINE} ];then
+cat << eof
+    Issuing: MACHINE=${COMPULAB_MACHINE} souce compulab-setup-env -b ${BUILD_DIR}-${COMPULAB_MACHINE}
+eof
+MACHINE=${COMPULAB_MACHINE} source compulab-setup-env -b ${BUILD_DIR}-${COMPULAB_MACHINE}
+fi
+
+cat << eof
+    Issue this command to get into the Yocto build environment:
+    cd ${BSP_DIR}; source compulab-setup-env ${BUILD_DIR}-${COMPULAB_MACHINE}
+eof
