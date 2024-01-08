@@ -12,7 +12,7 @@ QT_SETUP_SCRIPT=sources/meta-boot2qt-compulab/tools/compulab-setup-env
 
 if [ ! -d ${BSP_DIR}/.repo ];then
     repo init -u git://code.qt.io/yocto/boot2qt-manifest -m ${QT_MANIFEST}
-    wget --directory-prefix .repo/local_manifests https://raw.githubusercontent.com/compulab-yokneam/meta-bsp-imx8mp/mickledore/scripts/meta-bsp-imx8mp-machine.xml
+    wget --directory-prefix .repo/local_manifests https://raw.githubusercontent.com/compulab-yokneam/meta-bsp-imx8mp/mickledore-2.0.0/scripts/meta-bsp-imx8mp-machine.xml
     wget --directory-prefix .repo/local_manifests https://raw.githubusercontent.com/compulab-yokneam/meta-boot2qt-compulab/mickledore/scripts/meta-boot2qt-compulab.xml
     repo sync
 fi
