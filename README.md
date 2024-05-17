@@ -14,7 +14,7 @@ export MACHINE=ucm-imx8m-plus
 
 # Prepare Boot2Qt build environment
 <pre>
-source <(curl -L https://raw.githubusercontent.com/compulab-yokneam/meta-boot2qt-compulab/mickledore/tools/run.me)
+source <(curl -L https://raw.githubusercontent.com/compulab-yokneam/meta-boot2qt-compulab/nanbield/tools/run.me)
 </pre>
 
 # Create a Boot2Qt image

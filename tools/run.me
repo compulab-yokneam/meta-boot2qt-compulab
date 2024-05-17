@@ -6,14 +6,14 @@ export BSP_DIR=${BSP_DIR:-$(pwd)/compulab-boot2qt-bsp}
 mkdir ${BSP_DIR} -p
 pushd ${BSP_DIR}
 BSP_DIR=$(pwd)
-QT_MANIFEST=v6.6.1.xml
+QT_MANIFEST=v6.7.0.xml
 BUILD_DIR=build-b2qt-${COMPULAB_MACHINE}
 QT_SETUP_SCRIPT=sources/meta-boot2qt-compulab/tools/compulab-setup-env
 
 if [ ! -d ${BSP_DIR}/.repo ];then
     repo init -u git://code.qt.io/yocto/boot2qt-manifest -m ${QT_MANIFEST}
-    wget --directory-prefix .repo/local_manifests https://raw.githubusercontent.com/compulab-yokneam/meta-bsp-imx8mp/mickledore-2.0.0/scripts/meta-bsp-imx8mp-machine.xml
-    wget --directory-prefix .repo/local_manifests https://raw.githubusercontent.com/compulab-yokneam/meta-boot2qt-compulab/mickledore/scripts/meta-boot2qt-compulab.xml
+    wget --directory-prefix .repo/local_manifests https://raw.githubusercontent.com/compulab-yokneam/meta-bsp-imx8mp/nanbield/scripts/meta-bsp-imx8mp-machine.xml
+    wget --directory-prefix .repo/local_manifests https://raw.githubusercontent.com/compulab-yokneam/meta-boot2qt-compulab/nanbield/scripts/meta-boot2qt-compulab.xml
     repo sync
 fi
 
