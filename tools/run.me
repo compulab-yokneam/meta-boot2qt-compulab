@@ -1,30 +1,18 @@
 #!/bin/bash -e
 
-export COMPULAB_MACHINE=ucm-imx8m-plus
-export MACHINE=${COMPULAB_MACHINE}
-export BSP_DIR=${BSP_DIR:-$(pwd)/compulab-boot2qt-bsp}
-mkdir ${BSP_DIR} -p
-pushd ${BSP_DIR}
-BSP_DIR=$(pwd)
-QT_MANIFEST=v6.6.1.xml
-BUILD_DIR=build-b2qt-${COMPULAB_MACHINE}
-QT_SETUP_SCRIPT=sources/meta-boot2qt-compulab/tools/compulab-setup-env
+SCRIPTS+=" https://raw.githubusercontent.com/compulab-yokneam/meta-boot2qt-compulab/nanbield-addon/scripts/meta-boot2qt-compulab.xml"
 
-if [ ! -d ${BSP_DIR}/.repo ];then
-    repo init -u git://code.qt.io/yocto/boot2qt-manifest -m ${QT_MANIFEST}
-    wget --directory-prefix .repo/local_manifests https://raw.githubusercontent.com/compulab-yokneam/meta-bsp-imx8mp/mickledore-2.0.0/scripts/meta-bsp-imx8mp-machine.xml
-    wget --directory-prefix .repo/local_manifests https://raw.githubusercontent.com/compulab-yokneam/meta-boot2qt-compulab/mickledore/scripts/meta-boot2qt-compulab.xml
-    repo sync
-fi
+function update_environment() {
+    push ${BUILDDIR}/../
+    if [ -d ${BUILDDIR}/../.repo ];then
 
-if [ ! -d ${BSP_DIR}/${BUILD_DIR} ];then
-cat << eof
-    Issuing: MACHINE=${COMPULAB_MACHINE} souce ${QT_SETUP_SCRIPT} ${BUILD_DIR}
-eof
-MACHINE=${COMPULAB_MACHINE} source ${QT_SETUP_SCRIPT} ${BUILD_DIR}
-fi
+        for script in ${SCRIPTS};do
+            [[ -f ${BUILDDIR}/../.repo/local_manifests/$(basename ${script}) ]] || wget --directory-prefix .repo/local_manifests ${script}
+        done
 
-cat << eof
-    Issue this command to get into the Yocto build environment:
-    cd ${BSP_DIR}; source ${QT_SETUP_SCRIPT} ${BUILD_DIR}
-eof
+        repo sync
+    fi
+    popd
+}
+
+[[ -z "${BUILDDIR}" ]] || update_environment
