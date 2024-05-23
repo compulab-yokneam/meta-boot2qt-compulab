@@ -1,0 +1,9 @@
+#
+#
+# Boot2Qt Fragemnt
+#
+# Please make sure that the meta-boot2qt layers are in
+IMAGE_INSTALL:append = " boot2qt-appcontroller boot2qt-startupscreen boot2qt-demolauncher default-qt-envs "
+BBMASK += "meta-boot2qt-distro/recipes-devtools/mingw-w64"
+DRI_DEVICE = "card1"
+MACHINE_HOSTNAME = "${MACHINE}"

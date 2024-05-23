@@ -1,0 +1,2 @@
+BBLAYERS += "${BSPDIR}/sources/meta-boot2qt/meta-boot2qt"
+BBLAYERS += "${BSPDIR}/sources/meta-boot2qt/meta-boot2qt-distro"

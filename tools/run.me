@@ -1,18 +1,40 @@
 #!/bin/bash -e
 
+SCRIPTS+=" https://raw.githubusercontent.com/compulab-yokneam/meta-boot2qt-compulab/nanbield-addon/scripts/meta-boot2qt.xml"
 SCRIPTS+=" https://raw.githubusercontent.com/compulab-yokneam/meta-boot2qt-compulab/nanbield-addon/scripts/meta-boot2qt-compulab.xml"
 
+function update_conf_files() {
+    local T="${BUILDDIR}/../sources/meta-boot2qt-compulab/templates"
+    for _d in ${T}/*;do
+        _file=$(basename ${_d})
+        for _f in ${_d}/*;do
+            cat ${_f} >> ${BUILDDIR}/conf/${_file}
+        done;
+    done
+}
+
 function update_environment() {
-    push ${BUILDDIR}/../
     if [ -d ${BUILDDIR}/../.repo ];then
-
         for script in ${SCRIPTS};do
-            [[ -f ${BUILDDIR}/../.repo/local_manifests/$(basename ${script}) ]] || wget --directory-prefix .repo/local_manifests ${script}
+            [[ ! -f ${BUILDDIR}/../.repo/local_manifests/$(basename ${script}) ]] || return 1
+    		wget --directory-prefix .repo/local_manifests ${script} || true
         done
-
-        repo sync
+        repo sync || true
     fi
+    return 0
+}
+
+function update_function() {
+    pushd ${BUILDDIR}/../
+    update_environment && update_conf_files || true
     popd
 }
 
-[[ -z "${BUILDDIR}" ]] || update_environment
+function help_function() {
+cat << eof
+    Make sure that the script issued from the Yocto environment.
+    BUILDDIR is not defined !!!
+eof
+}
+
+[[ -n "${BUILDDIR}" ]] && update_function || help_function

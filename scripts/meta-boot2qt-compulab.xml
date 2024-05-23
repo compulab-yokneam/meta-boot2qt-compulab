@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-  <manifest>
+<manifest>
+
   <remote fetch="https://github.com/compulab-yokneam" name="compulab"/>
+  <project name="meta-boot2qt-compulab" remote="compulab" revision="nanbield-addon" path="sources/meta-boot2qt-compulab"/>
 
-  <project name="meta-boot2qt-compulab" remote="compulab" revision="nanbield-addon" path="sources/meta-boot2qt-compulab" >
-    <linkfile src="tools/compulab-setup-env" dest="compulab-setup-boot2qt-env" />
-  </project>
-
-  </manifest>
+</manifest>
