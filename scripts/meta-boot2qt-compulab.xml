@@ -2,6 +2,6 @@
 <manifest>
 
   <remote fetch="https://github.com/compulab-yokneam" name="compulab"/>
-  <project name="meta-boot2qt-compulab" remote="compulab" revision="nanbield-addon" path="sources/meta-boot2qt-compulab"/>
+  <project name="meta-boot2qt-compulab" remote="compulab" revision="boot2qt-addon" path="sources/meta-boot2qt-compulab"/>
 
 </manifest>
