@@ -19,6 +19,7 @@ function update_environment() {
             [[ ! -f ${BUILDDIR}/../.repo/local_manifests/$(basename ${script}) ]] || return 1
     		wget --directory-prefix .repo/local_manifests ${script} || true
         done
+        [[ -z "${b2q_revision}" ]] || sed -i 's/nanbield/${b2q_revision}/g' .repo/local_manifests/meta-boot2qt.xml[[ -z "${b2q_revision}" ]] || sed -i 's/nanbield/${b2q_revision}/g' .repo/local_manifests/meta-boot2qt.xml
         repo sync || true
     fi
     return 0
