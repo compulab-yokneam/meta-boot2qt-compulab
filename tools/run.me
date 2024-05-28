@@ -16,11 +16,12 @@ function update_conf_files() {
 
 function update_environment() {
     if [ -d ${BUILDDIR}/../.repo ];then
+        distro_codename=$(awk '(/^DISTRO_CODENAME/)&&(gsub(/ /,""))' ${BUILDDIR}/../sources/poky/meta-poky/conf/distro/poky.conf)
         for script in ${SCRIPTS};do
             [[ ! -f ${BUILDDIR}/../.repo/local_manifests/$(basename ${script}) ]] || return 1
-    		wget --directory-prefix .repo/local_manifests ${script} || true
+            wget --directory-prefix .repo/local_manifests ${script} || true
         done
-        [[ -z "${b2q_revision}" ]] || sed -i "s/nanbield/${b2q_revision}/g" ${BUILDDIR}/../.repo/local_manifests/meta-boot2qt.xml
+        [[ -z "${distro_codename}" ]] || sed -i "s/nanbield/${distro_codename}/g" ${BUILDDIR}/../.repo/local_manifests/meta-boot2qt.xml
         repo sync || true
     fi
     return 0
