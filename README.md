@@ -8,5 +8,5 @@ Supported CompuLab Machines:
 
 # Prepare Boot2Qt build environment
 <pre>
-source <(curl -L https://raw.githubusercontent.com/compulab-yokneam/meta-boot2qt-compulab/nanbield-addon/tools/run.me)
+b2q_revision=nanbield source <(curl -L https://raw.githubusercontent.com/compulab-yokneam/meta-boot2qt-compulab/nanbield-addon/tools/run.me)
 </pre>
