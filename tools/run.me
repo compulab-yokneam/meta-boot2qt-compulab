@@ -16,7 +16,7 @@ function update_conf_files() {
 
 function update_environment() {
     if [ -d ${BUILDDIR}/../.repo ];then
-        distro_codename=$(awk '(/^DISTRO_CODENAME/)&&(gsub(/ /,""))' ${BUILDDIR}/../sources/poky/meta-poky/conf/distro/poky.conf)
+        distro_codename=$(awk '/^DISTRO_CODENAME/&&($0=$NF)&&(gsub(/"/,""))' ${BUILDDIR}/../sources/poky/meta-poky/conf/distro/poky.conf)
         for script in ${SCRIPTS};do
             [[ ! -f ${BUILDDIR}/../.repo/local_manifests/$(basename ${script}) ]] || return 1
             wget --directory-prefix .repo/local_manifests ${script} || true
