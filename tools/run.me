@@ -1,8 +1,8 @@
 #!/bin/bash -e
 
 unset SCRIPTS
-SCRIPTS+=" https://raw.githubusercontent.com/compulab-yokneam/meta-boot2qt-compulab/nanbield-addon/scripts/meta-boot2qt.xml"
-SCRIPTS+=" https://raw.githubusercontent.com/compulab-yokneam/meta-boot2qt-compulab/nanbield-addon/scripts/meta-boot2qt-compulab.xml"
+SCRIPTS+=" https://raw.githubusercontent.com/compulab-yokneam/meta-boot2qt-compulab/boot2qt-addon/scripts/meta-boot2qt.xml"
+SCRIPTS+=" https://raw.githubusercontent.com/compulab-yokneam/meta-boot2qt-compulab/boot2qt-addon/scripts/meta-boot2qt-compulab.xml"
 
 function update_conf_files() {
     local T="${BUILDDIR}/../sources/meta-boot2qt-compulab/templates"
