@@ -6,7 +6,7 @@
           pushurl="ssh://codereview.qt-project.org/yocto"/>
   <project name="meta-boot2qt"
            remote="boot2qt"
-           revision="nanbield"
-           upstream="nanbield"
+           revision="@@DISTRO_NAME@@"
+           upstream="@@DISTRO_NAME@@"
 	  path="sources/meta-boot2qt"/>
 </manifest>
