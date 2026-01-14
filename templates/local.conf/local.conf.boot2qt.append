@@ -7,3 +7,7 @@ IMAGE_INSTALL:append = " boot2qt-appcontroller boot2qt-startupscreen boot2qt-dem
 BBMASK += "meta-boot2qt-distro/recipes-devtools/mingw-w64"
 DRI_DEVICE = "card1"
 MACHINE_HOSTNAME = "${MACHINE}"
+
+#
+BBMASK += "meta-bsp-imx8mp/recipes-connectivity/connman"
+CORE_IMAGE_EXTRA_INSTALL:remove  = " networkmanager modemmanager "
